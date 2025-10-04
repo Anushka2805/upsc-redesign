@@ -120,3 +120,146 @@
     @apply bg-background text-foreground;
   }
 }
+/* Add this to the bottom of src/app/globals.css */
+
+/* Splash Screen Styles */
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.splash-screen.fade-out {
+  opacity: 0;
+}
+
+.chakra-container {
+  animation: scale-up 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.chakra-image {
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(50); /* Make it large enough to cover the screen */
+  }
+}
+
+/* Typewriter Effect Styles */
+.typewriter-text::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+/* src/app/globals.css */
+
+
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+  border-radius: 1rem; /* Rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* For Safari */
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+body {
+  /* Example subtle gradient background */
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+/* src/app/globals.css */
+
+/* Set a background for the body if you haven't already */
+body {
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+/* Combined Flipping Glass Card CSS */
+.card-container {
+  perspective: 1500px;
+  min-height: 400px; /* Set a height for the cards */
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-d;
+}
+
+.card-container:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* For Safari */
+  backface-visibility: hidden;
+
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  /* This is key for long content: makes the back scrollable */
+  overflow-y: auto;
+}
