@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Bell, CheckCircle, AlertCircle } from "lucide-react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 import { useTheme } from "next-themes";
 export default function UPSCDashboard() {
   const { theme, setTheme } = useTheme();
