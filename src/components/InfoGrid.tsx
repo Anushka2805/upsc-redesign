@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- DATA for the grid ---
+// --- DATA for the grid ---
 const infoData = [
   {
     title: 'Examination Notifications',

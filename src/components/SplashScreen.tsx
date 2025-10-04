@@ -10,7 +10,7 @@ export const SplashScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsFadingOut(true);
-    }, 2500); // Animation will last for 2.5 seconds
+    }, 1500); // Animation will last for 2.5 seconds
 
     return () => clearTimeout(timer);
   }, []);
