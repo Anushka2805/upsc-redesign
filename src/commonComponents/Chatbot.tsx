@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import * as React from "react";
 import { useState } from "react";
@@ -17,8 +17,8 @@ export default function ChatbotWindow() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+//   const handleSend = async () => {
+//     if (!input.trim()) return;
 
     // Add user message
     setMessages((prev) => [...prev, { sender: "user", text: input }]);
