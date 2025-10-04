@@ -1,125 +1,58 @@
-"use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import { CheckCircle, AlertCircle } from "lucide-react";
-import { useTheme } from "next-themes";
-export default function UPSCDashboard() {
-  const { theme, setTheme } = useTheme();
+import DashboardHeader from "@/components/cards/DashboardHeader";
+import ExamProgressTracker from "@/components/cards/ExamProgressTracker";
+import PersonalProfile from "@/components/cards/PersonalProfile";
+import Sidebar from "@/components/cards/Sidebar"; 
+
+const DashboardPage = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground p-6 md:p-12">
-      {/* Header */}
-      <header className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-lg font-semibold">UNION PUBLIC SERVICE COMMISSION</h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="font-medium">Anushka</span>
-          <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-            <span className="text-xs font-bold">AA</span>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex">
+      {/* ✅ Fixed Sidebar */}
+      <Sidebar />
+
+      {/* ✅ Main content area shifted right */}
+      <main className="flex-1 ml-64 p-6">
+        {/* Header Section */}
+        <DashboardHeader />
+
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
+          {/* Left Column (Exam Tracker + Quick Actions) */}
+          <div className="lg:col-span-2 space-y-8">
+            <ExamProgressTracker />
+
+            {/* Quick Actions */}
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-blue-600 text-white p-6 rounded-xl hover:bg-blue-700 transition-colors cursor-pointer">
+                  <p className="text-lg font-semibold">View UPSC Calendar</p>
+                  <p className="text-sm text-blue-200">
+                    Check all upcoming exams
+                  </p>
+                </div>
+
+                <div className="bg-gray-100 p-6 rounded-xl hover:bg-gray-200 transition-colors cursor-pointer">
+                  <p className="text-lg font-semibold text-gray-800">
+                    My Study Plan
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Access your personalized plan
+                  </p>
+                </div>
+
+                {/* Add more Quick Action cards if needed */}
+              </div>
+            </div>
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {theme === "dark" ? "🌙" : "☀️"}
-          </Button>
+
+          {/* Right Column (Profile) */}
+          <div className="lg:col-span-1 space-y-8">
+            <PersonalProfile />
+          </div>
         </div>
-      </header>
-      <h2 className="text-2xl font-bold mb-6">Welcome, Aspirant</h2>
-      {/* Grid layout */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {/* Application Status */}
-        <Card className="col-span-2">
-          <CardHeader>
-            <CardTitle>Application Status</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-3">
-            <CheckCircle className="text-green-500" />
-            <div>
-              <p className="font-semibold">Submitted</p>
-              <p className="text-sm text-muted-foreground">
-                UPSC CSE 2025 <br /> Submitted on: 01 Jan 2025
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        {/* Notifications */}
-        <Card className="col-span-2">
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-4">
-              <li className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <AlertCircle className="text-blue-500" /> Admit Card available
-                </span>
-                <span className="text-sm text-muted-foreground">15 Sep 2025</span>
-              </li>
-              <Separator />
-              <li className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <AlertCircle className="text-blue-500" /> UPSC CSE 2025 results
-                </span>
-                <span className="text-sm text-muted-foreground">25 May 2025</span>
-              </li>
-              <Separator />
-              <li className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <AlertCircle className="text-blue-500" /> New exam notification
-                </span>
-                <span className="text-sm text-muted-foreground">01 Jan 2025</span>
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
-        {/* Examination */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Examination</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm">
-            <div className="flex justify-between">
-              <span>Prelims</span>
-              <span>05 Jun 2025</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Mains</span>
-              <span>17 Sep 2025 (Delhi)</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Interview</span>
-              <span>23 Nov 2025</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Final Result</span>
-              <span>30 Apr 2025</span>
-            </div>
-          </CardContent>
-        </Card>
-        {/* Recent Activities */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Activities</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm">
-            <div className="flex justify-between">
-              <span>Submitted application form</span>
-              <span>01 Jan 2025</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Payment of fees</span>
-              <span>01 Jan 2025</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Uploaded documents</span>
-              <span>01 Jan 2025</span>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      </main>
     </div>
   );
-}
+};
+
+export default DashboardPage;
