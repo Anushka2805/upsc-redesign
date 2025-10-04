@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
   --color-background: var(--background);
@@ -214,15 +214,11 @@
 }
 
 body {
-  /* Example subtle gradient background */
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  background: var(--background);
 }
 /* src/app/globals.css */
 
 /* Set a background for the body if you haven't already */
-body {
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
-}
 
 /* Combined Flipping Glass Card CSS */
 .card-container {
@@ -258,8 +254,20 @@ body {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
-.card-back {
-  transform: rotateY(180deg);
-  /* This is key for long content: makes the back scrollable */
-  overflow-y: auto;
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* --- CHANGE THIS LINE --- */
+  background: rgba(75, 85, 221, 0.25); /* More visible semi-transparent blue */
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }

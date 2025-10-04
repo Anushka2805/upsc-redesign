@@ -1,8 +1,10 @@
 // src/app/components/InfoGrid.tsx
 'use client';
 
-import GlowingInfoBox from './GlowingInfo';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
+// --- DATA for the grid ---
 const infoData = [
   {
     title: 'Examination Notifications',
@@ -36,10 +38,67 @@ const infoData = [
   },
 ];
 
+// --- SUB-COMPONENT: A single glowing box ---
+function GlowingInfoBox({ title, description, glowColor }: { title: string; description: string; glowColor: string; }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      onClick={() => alert(`You clicked on ${title}`)}
+      className="relative p-8 h-48 flex flex-col justify-center items-center rounded-2xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 cursor-pointer overflow-hidden transition-all duration-300 hover:border-gray-500"
+    >
+      <motion.div
+  className={`absolute -inset-2 rounded-full blur-xl opacity-0 transition-opacity duration-500 ${glowColor}`}
+  animate={{ opacity: isHovered ? 1 : 0 }}
+/>
+
+      <AnimatePresence>
+        {!isHovered ? (
+          <motion.h3
+            key="title"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-white text-2xl font-bold text-center"
+          >
+            {title}
+          </motion.h3>
+        ) : (
+          <motion.p
+            key="description"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-gray-300 text-center"
+          >
+            {description}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+
+// --- MAIN COMPONENT: The grid that uses the box ---
 export default function InfoGrid() {
   return (
-    <section className="w-full bg-gray-900 py-20">
-      <div className="container mx-auto px-4">
+    <section className="relative w-full py-20 overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: 'url("/6boxbg.jpeg")' }}
+      ></div>
+      
+      {/* Dark Blue Overlay */}
+      <div className="absolute inset-0 bg-blue-900 opacity-75"></div> {/* Adjust opacity for desired darkness */}
+
+      {/* Content (the actual grid of boxes) */}
+      <div className="relative z-10 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {infoData.map((item, index) => (
             <GlowingInfoBox
